@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Investimento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .result div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Calculadora de Investimento</h1>
+        <label for="investimento">Digite o valor investido (R$):</label>
+        <input type="number" id="investimento" placeholder="Exemplo: 1000" min="0" step="any">
+        
+        <button onclick="calcularInvestimento()">Calcular</button>
+
+        <div class="result" id="result">
+            <!-- Resultados serão exibidos aqui -->
+        </div>
+    </div>
+
+    <script>
+        function calcularInvestimento() {
+            // Obtendo o valor investido digitado pelo usuário
+            var valorInvestido = parseFloat(document.getElementById("investimento").value);
+            
+            // Verificando se o valor é válido
+            if (isNaN(valorInvestido) || valorInvestido <= 0) {
+                alert("Por favor, insira um valor válido!");
+                return;
+            }
+
+            // Calculando os valores para os 3 períodos
+            var resultado30dias = valorInvestido * 3.36;  // 236% em 30 dias
+            var resultado15dias = valorInvestido * 2.35;  // 135% em 15 dias
+            var resultado7dias = valorInvestido * 2.00;   // 100% em 7 dias
+
+            // Exibindo os resultados
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `
+                <div><strong>Investimento após 30 dias (236%):</strong> R$ ${resultado30dias.toFixed(2)}</div>
+                <div><strong>Investimento após 15 dias (135%):</strong> R$ ${resultado15dias.toFixed(2)}</div>
+                <div><strong>Investimento após 7 dias (100%):</strong> R$ ${resultado7dias.toFixed(2)}</div>
+            `;
+        }
+    </script>
+
+</body>
+</html>
